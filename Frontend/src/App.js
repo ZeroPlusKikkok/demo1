@@ -1,18 +1,30 @@
+import React from 'react';
 import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Signin from './components/profile/profile.js';
+import Profile from './components/register/signin.js';
 
-function App(props) {
+function App() {
+  const token = localStorage.getItem('accessToken');
+
+  if(!token) {
+    return <Signin />
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img className="Avatar"
-          src={props.auther.avatarUrl}
-          alt={props.auther.name}
-        />
-        
-      </header>
+    <div className="wrapper">
+      <BrowserRouter>
+        <switch>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/">
+            <Profile />
+          </Route>
+        </switch>
+      </BrowserRouter>
     </div>
   );
 }
-
 
 export default App;

@@ -1,28 +1,19 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Signin from './components/profile/profile.js';
-import Profile from './components/register/signin.js';
+import { Routes, Route } from 'react-router-dom';
+import Signin from './components/register/Signin.js';
+import Register from './components/register/Register.js';
+import Profile from './components/profile/Profile.js';
 
 function App() {
-  const token = localStorage.getItem('accessToken');
-
-  if(!token) {
-    return <Signin />
-  }
-
   return (
     <div className="wrapper">
-      <BrowserRouter>
-        <switch>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/">
-            <Profile />
-          </Route>
-        </switch>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Signin />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
     </div>
   );
 }

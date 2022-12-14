@@ -11,6 +11,7 @@ const expressSession = require('express-session')({
   resave: false,
   saveUninitalzed: false,
 });
+const cors = require('cors');
 
 const index = require('./routes/index');
 const api = require('./routes/api/index');
@@ -20,7 +21,7 @@ const auth = require('./routes/api/auth');
 const app = express();
 
 // Connect Database
-mongoose.connect('mongodb://localhost/mydata', {
+mongoose.connect('mongodb://0.0.0.0/mydb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 // Configure passport
 const User = require('./models/user');
